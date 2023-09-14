@@ -14,6 +14,23 @@ export class App extends Component{
     filter:'',
   };
 
+  componentDidMount() {
+    const localStorageContacts = localStorage.getItem('contacts');
+
+    if (localStorageContacts) {
+      this.setState({ contacts: JSON.parse(localStorageContacts) });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    const prevContacts = prevState.contacts;
+    const newContacts = this.state.contacts;
+
+    if (prevContacts !== newContacts) {
+      localStorage.setItem('contacts', JSON.stringify(newContacts));
+    }
+  }
+
   handleFilterChange = event => {
     const filterValue = event.target.value;
     this.setState({ filter: filterValue });
@@ -31,6 +48,7 @@ export class App extends Component{
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
+    
   };
 
   getFilteredContacts = () => {
@@ -46,7 +64,7 @@ export class App extends Component{
 
     return (
       <main className={css.main}>
-        <h1 hidden>React HW-02-Phonebook</h1>
+        <h1 hidden>React HW-03-Phonebook</h1>
 
         <Section title='Phonebook'>
           <ContactForm handleFormSubmit={this.onFormSubmit} />
