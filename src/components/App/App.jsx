@@ -33,7 +33,7 @@ export class App extends Component{
 
   handleFilterChange = event => {
     const filterValue = event.target.value;
-    this.setState({ filter: filterValue });
+    this.setState({ filter: filterValue }); 
   };
 
   onFormSubmit = newContact => {
