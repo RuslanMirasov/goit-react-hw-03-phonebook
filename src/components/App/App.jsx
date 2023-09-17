@@ -23,12 +23,8 @@ export class App extends Component{
   }
 
   componentDidUpdate(_, prevState) {
-    const prevContacts = prevState.contacts;
-    const newContacts = this.state.contacts;
-
-    if (prevContacts !== newContacts) {
-      localStorage.setItem('contacts', JSON.stringify(newContacts));
-    }
+    const { contacts } = this.state;
+    prevState.contacts !== contacts && localStorage.setItem('contacts', JSON.stringify(contacts));
   }
 
   handleFilterChange = event => {
